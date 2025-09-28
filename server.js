@@ -5,7 +5,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-const PORT = 3001;
+// Renderが指定するポート番号を使うように修正。なければ3001を使う。
+const PORT = process.env.PORT || 3001; 
 const JWT_SECRET = 'your-super-secret-key-for-this-app';
 
 const db = new sqlite3.Database("./database.db", (err) => {
@@ -181,3 +182,4 @@ app.put('/api/messages/read/:matchId', verifyToken, (req, res) => {
 app.listen(PORT, () => {
   console.log(`サーバーがポート${PORT}で起動しました。`);
 });
+
